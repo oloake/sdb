@@ -1,2 +1,4 @@
 cmake .. -DCMAKE_TOOLCHAIN_FILE=/home/oloake/src/vcpkg/scripts/buildsystems/vcpkg.cmake
 cmake --build .
+
+echo 0 > /proc/sys/kernel/yama/ptrace_scope (as root)
