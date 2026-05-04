@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <memory>
 #include <sys/types.h>
+#include <cstdint>
 
 namespace sdb {
 
@@ -12,6 +13,13 @@ namespace sdb {
     running,
     exited,
     terminated
+  };
+
+    struct stop_reason {
+    stop_reason(int wait_status);
+
+    process_state reason;
+    std::uint8_t info;
   };
 
   class process {
@@ -27,7 +35,7 @@ namespace sdb {
       static std::unique_ptr<process> attach(pid_t pid);
 
       void resume();
-      /*?*/ wait_on_signal();
+      stop_reason wait_on_signal();
       pid_t pid() const {return pid_;}
 
     private:
